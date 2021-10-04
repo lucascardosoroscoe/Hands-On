@@ -1,109 +1,37 @@
 <?php
+include('FrasesMotivacionais.php');
 
-class FrasesMotivacionais
-{
-    private $frase;
+$dia = $_GET['dia'];
 
-    
-    public function __construct(FraseDoDia $frase)
-    {
-        $this->frase = $frase;
-    }
-
-    public function setFrase(FraseDoDia $frase)
-    {
-        $this->frase = $frase;
-    }
-
-    public function exibirFrase(): void
-    {
-        $result = $this->frase->getMsg();
-        echo $result . "\n";
-    }
+$frase = new FrasesMotivacionais(new FraseDeSabado());
+switch($dia){
+    case '1': 
+        $frase->setFrase(new FraseDeDomingo());
+        $frase->exibirFrase();
+        break;
+    case '2': 
+        $frase->setFrase(new FraseDeSegunda());
+        $frase->exibirFrase();
+        break;
+    case '3': 
+        $frase->setFrase(new FraseDeTerca());
+        $frase->exibirFrase();
+        break;
+    case '4': 
+        $frase->setFrase(new FraseDeQuarta());
+        $frase->exibirFrase();
+        break;
+    case '5': 
+        $frase->setFrase(new FraseDeQuinta());
+        $frase->exibirFrase();
+        break;
+    case '6': 
+        $frase->setFrase(new FraseDeSexta());
+        $frase->exibirFrase();
+        break;
+    case '7': 
+        $frase->exibirFrase();
+        break;
+    default:
+        echo "Dia da semana inválido";
 }
-
-interface FraseDoDia
-{
-    public function getMsg();
-}
-
-class FraseDeSegunda implements FraseDoDia
-{
-    public function getMsg()
-    {
-        $msg = "Hoje é segunda-feira.";
-
-        return $msg;
-    }
-}
-
-class FraseDeTerca implements FraseDoDia
-{
-    public function getMsg()
-    {
-        $msg = "Hoje é terça-feira.";
-
-        return $msg;
-    }
-}
-
-class FraseDeQuarta implements FraseDoDia
-{
-    public function getMsg()
-    {
-        $msg = "Hoje é quarta-feira.";
-
-        return $msg;
-    }
-}
-
-class FraseDeQuinta implements FraseDoDia
-{
-    public function getMsg()
-    {
-        $msg = "Hoje é quinta-feira.";
-
-        return $msg;
-    }
-}
-
-class FraseDeSexta implements FraseDoDia
-{
-    public function getMsg()
-    {
-        $msg = "Hoje é sexta-feira.";
-
-        return $msg;
-    }
-}
-
-class FraseDeSábado implements FraseDoDia
-{
-    public function getMsg()
-    {
-        $msg = "Hoje é Sábado.";
-
-        return $msg;
-    }
-}
-
-class FraseDeDomingo implements FraseDoDia
-{
-    public function getMsg()
-    {
-        $msg = "Hoje é Domingo.";
-
-        return $msg;
-    }
-}
-
-
-$frase = new FrasesMotivacionais(new FraseDeSegunda());
-echo "Frase de Segunda:\n";
-$frase->exibirFrase();
-
-echo "\n";
-
-echo "Frase de terça:\n";
-$frase->setFrase(new FraseDeTerca());
-$frase->exibirFrase();
